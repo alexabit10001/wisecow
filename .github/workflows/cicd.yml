@@ -39,8 +39,9 @@ jobs:
           mkdir -p $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
 
-      - name: Deploy to Kubernetes
+      # Step 5: Deploy via your deploy.sh script
+      - name: Deploy to Minikube
         run: |
-          kubectl apply -f deployment.yaml
-          kubectl apply -f service.yaml
+          chmod +x deploy.sh
+          ./deploy.sh
 
